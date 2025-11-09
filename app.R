@@ -38,7 +38,7 @@ data_cols <- c(
   "Finance_Knowledge", "Investment_Knowledge", "Problem_Solving", "Team_Handling",
   "Debtor_reconcilation", "Payroll_management", "Bayesian", "Optimization",
   "Knowledge_in", "City", "Educational_qualifications", "Salary", "URL",
-  "Search_Term", "Job_Category", "Experience_Category", "Location",
+  "Search_Term", "Job_Category", "Experience_Category", "Location", "Mode",
   "Payment Frequency", "BSc_needed", "MSc_needed", "PhD_needed", "English_needed",
   "year"
 )
@@ -82,7 +82,7 @@ ui <- fluidPage(
       width = 3,
       h3("Core Job Ad Info"),
       selectInput("consultant_name", "Consultant:", 
-                  choices = c("Y.M.A.P.Rajapaksha", "S.G.V.S.Samaranayaka", "I.V.N.N.Wijesekara", "G.R.Jayasinghe", "S.S.Balasooriya", "M.N.D.Gunarathna", "N.G.S.Minimuthu"), selected = "Y.M.A.P.Rajapaksha"),
+                  choices = c("Y.M.A.P.Rajapaksha", "S.G.V.S.Samaranayaka", "I.V.N.N.Wijesekara", "G.R.Jayasinghe", "M.N.D.Gunarathna", "N.G.S.Minimuthu", "L.P.U.D.N. Vasana", "Y.G.D.M.S.Thathsarani", "P.A.H.N.Dharmasena", "G.K.L.L.S.Premathilaka", "N. L. N. Kumarage", "H.L.D.H. Sandamini"), selected = "Y.M.A.P.Rajapaksha"),
       
       textInput("date_retrieved", "Date Retrieved:", value = ""),
       textInput("date_published", "Date Published:", value = ""),
@@ -108,6 +108,7 @@ ui <- fluidPage(
                  textInput("search_term", "Search Term:"),
                  textInput("city", "City:"),
                  textInput("location", "Location:"),
+                 textInput("mode", "Mode:"),
                  textInput("educational_qualifications", "Educational Qualifications:"),
                  textInput("salary", "Salary (text allowed):", value = ""),
                  textInput("payment_frequency", "Payment Frequency:", value = ""),
@@ -173,6 +174,7 @@ server <- function(input, output, session) {
     new_row$Search_Term <- input$search_term
     new_row$City <- input$city
     new_row$Location <- input$location
+    new_row$Mode <- input$mode
     new_row$Educational_qualifications <- input$educational_qualifications
     new_row$Salary <- input$salary
     new_row$`Payment Frequency` <- input$payment_frequency
@@ -204,6 +206,7 @@ server <- function(input, output, session) {
     updateTextInput(session, "search_term", value = "")
     updateTextInput(session, "city", value = "")
     updateTextInput(session, "location", value = "")
+    updateTextInput(session, "mode", value = "")
     updateTextInput(session, "educational_qualifications", value = "")
     updateTextInput(session, "salary", value = "")
     updateTextInput(session, "payment_frequency", value = "")
@@ -232,3 +235,5 @@ server <- function(input, output, session) {
 # Run App
 # ----------------------------
 shinyApp(ui = ui, server = server)
+
+
